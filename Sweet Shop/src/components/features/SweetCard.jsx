@@ -5,7 +5,7 @@ const SweetCard = ({ sweet, onPurchase }) => {
     const isOutOfStock = sweet.quantity === 0;
 
     return (
-        <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100 flex flex-col h-full transform hover:-translate-y-1">
+        <div className="bg-white dark:bg-slate-800 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group border border-gray-100 dark:border-slate-700 flex flex-col h-full transform hover:-translate-y-1">
             <div className="relative h-48 overflow-hidden">
                 <img
                     src={sweet.image}
@@ -30,7 +30,7 @@ const SweetCard = ({ sweet, onPurchase }) => {
 
             <div className="p-5 flex flex-col flex-grow">
                 <div className="flex justify-between items-start mb-2">
-                    <h3 className="text-lg font-bold text-gray-800 line-clamp-1" title={sweet.name}>
+                    <h3 className="text-lg font-bold text-gray-800 dark:text-gray-100 line-clamp-1" title={sweet.name}>
                         {sweet.name}
                     </h3>
                     <span className="text-primary font-bold text-lg">
@@ -38,11 +38,11 @@ const SweetCard = ({ sweet, onPurchase }) => {
                     </span>
                 </div>
 
-                <p className="text-gray-500 text-sm mb-4 line-clamp-2 flex-grow">
+                <p className="text-gray-500 dark:text-gray-400 text-sm mb-4 line-clamp-2 flex-grow">
                     {sweet.description}
                 </p>
 
-                <div className="mt-auto pt-4 border-t border-gray-50">
+                <div className="mt-auto pt-4 border-t border-gray-50 dark:border-slate-700">
                     <Button
                         className="w-full"
                         variant={isOutOfStock ? 'ghost' : 'primary'}

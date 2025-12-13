@@ -36,14 +36,14 @@ const Dashboard = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center">
+            <div className="min-h-screen flex items-center justify-center dark:bg-slate-900 transition-colors duration-300">
                 <Loader2 className="w-8 h-8 text-primary animate-spin" />
             </div>
         );
     }
 
     return (
-        <div className="pb-12 bg-slate-50 min-h-screen">
+        <div className="pb-12 bg-slate-50 dark:bg-slate-900 min-h-screen transition-colors duration-300">
             {/* Hero Section */}
             <div className="bg-gradient-to-r from-primary to-orange-400 text-white py-16 px-4 mb-8">
                 <div className="max-w-7xl mx-auto text-center">
@@ -58,14 +58,14 @@ const Dashboard = () => {
 
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Search and Filter */}
-                <div className="flex flex-col md:flex-row gap-4 mb-8 items-center bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                <div className="flex flex-col md:flex-row gap-4 mb-8 items-center bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 transition-colors duration-300">
                     <div className="w-full md:w-96">
                         <Input
                             placeholder="Search for sweets..."
                             icon={Search}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
-                            className="bg-gray-50 border-transparent focus:bg-white"
+                            className="bg-gray-50 dark:bg-slate-700 border-transparent focus:bg-white dark:focus:bg-slate-600 dark:text-white dark:placeholder-gray-400"
                         />
                     </div>
 
@@ -76,7 +76,7 @@ const Dashboard = () => {
                                 onClick={() => setSelectedCategory(category)}
                                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${selectedCategory === category
                                         ? 'bg-primary text-white shadow-md'
-                                        : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                                        : 'bg-gray-100 dark:bg-slate-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-slate-600'
                                     }`}
                             >
                                 {category}
@@ -98,11 +98,11 @@ const Dashboard = () => {
                     </div>
                 ) : (
                     <div className="text-center py-20">
-                        <div className="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <Filter className="w-8 h-8 text-gray-400" />
+                        <div className="bg-gray-100 dark:bg-slate-800 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 transition-colors">
+                            <Filter className="w-8 h-8 text-gray-400 dark:text-gray-500" />
                         </div>
-                        <h3 className="text-xl font-medium text-gray-900">No sweets found</h3>
-                        <p className="text-gray-500 mt-2">Try adjusting your search or filters.</p>
+                        <h3 className="text-xl font-medium text-gray-900 dark:text-white">No sweets found</h3>
+                        <p className="text-gray-500 dark:text-gray-400 mt-2">Try adjusting your search or filters.</p>
                     </div>
                 )}
             </div>
