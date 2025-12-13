@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../api/client';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import SweetCard from '../components/features/SweetCard';
 import Input from '../components/ui/Input';
-import { Search, Filter, Loader2, SlidersHorizontal, ChevronDown } from 'lucide-react';
+import { Search, Filter, Loader2, SlidersHorizontal, ChevronDown, ShoppingCart } from 'lucide-react';
 import { mockSweets } from '../data/mockData';
 
 const Shop = () => {
@@ -14,6 +14,7 @@ const Shop = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [priceRange, setPriceRange] = useState(100);
+    const [showFilters, setShowFilters] = useState(false);
 
     // Fetch from API
     useEffect(() => {
@@ -81,11 +82,23 @@ const Shop = () => {
 
                     {/* Sidebar Filters */}
                     <div className="w-full lg:w-72 flex-shrink-0">
-                        <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl sticky top-24 border border-gray-100 dark:border-slate-700">
+                        {/* Mobile Filter Toggle */}
+                        <button
+                            onClick={() => setShowFilters(!showFilters)}
+                            className="lg:hidden w-full flex items-center justify-between bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 mb-4"
+                        >
+                            <span className="flex items-center gap-2 font-bold text-[#4A3B32] dark:text-white">
+                                <SlidersHorizontal className="w-5 h-5 text-primary" /> Filters
+                            </span>
+                            <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+                        </button>
+
+                        <div className={`${showFilters ? 'block' : 'hidden'} lg:block bg-white dark:bg-slate-800 p-6 rounded-2xl sticky top-24 border border-gray-100 dark:border-slate-700 shadow-sm lg:shadow-none`}>
                             <div className="flex items-center justify-between mb-6">
-                                <div className="flex items-center gap-2 text-[#4A3B32] dark:text-white font-serif font-bold text-xl">
+                                <div className="flex items-center gap-2 text-[#4A3B32] dark:text-white font-serif font-bold text-xl hidden lg:flex">
                                     <SlidersHorizontal className="w-5 h-5" /> Filters
                                 </div>
+                                <div className="lg:hidden font-bold text-[#4A3B32] dark:text-white">Filter Options</div>
                                 {(searchTerm || selectedCategory !== 'All' || priceRange !== 100) && (
                                     <button
                                         onClick={() => {
@@ -186,6 +199,22 @@ const Shop = () => {
                         )}
                     </div>
                 </div>
+            </div>
+            {/* Floating Cart Button (Mobile) */}
+            <div className="fixed bottom-6 right-6 z-50 lg:hidden">
+                <Link
+                    to="/cart"
+                    className="flex items-center justify-center w-14 h-14 bg-primary text-white rounded-full shadow-2xl hover:bg-[#E5633A] transition-all transform hover:scale-105"
+                >
+                    <div className="relative">
+                        <ShoppingCart className="w-6 h-6" />
+                        {cart.reduce((Acc, Item) => Acc + Item.quantity, 0) > 0 && (
+                            <span className="absolute -top-3 -right-3 bg-white text-primary text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-sm border border-orange-100">
+                                {cart.reduce((Acc, Item) => Acc + Item.quantity, 0)}
+                            </span>
+                        )}
+                    </div>
+                </Link>
             </div>
         </div>
     );

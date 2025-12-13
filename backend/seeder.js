@@ -30,7 +30,7 @@ const importData = async () => {
                 price: 45.99,
                 quantity: 15,
                 description: 'A luxurious red velvet cake with cream cheese frosting, perfect for special occasions.',
-                image: 'https://images.unsplash.com/photo-1586788680434-30d3244363c3?w=800&q=80'
+                image: '/Red.png'
             },
             {
                 name: 'Tiramisu Slice',
@@ -72,7 +72,7 @@ const importData = async () => {
                 price: 12.99,
                 quantity: 50,
                 description: 'Chewy cookies loaded with semi-sweet chocolate chips.',
-                image: 'https://images.unsplash.com/photo-1499636138143-bd649043ea52?w=800&q=80'
+                image: "/Chip.png"
             },
 
             // Chocolates
@@ -98,7 +98,7 @@ const importData = async () => {
                 price: 12.99,
                 quantity: 25,
                 description: 'Melt-in-your-mouth fudge with a perfect balance of sweet and salty.',
-                image: 'https://images.unsplash.com/photo-1582294406568-356c9a41925b?w=800&q=80'
+                image: '/Salted.png'
             },
 
             // Pastries
@@ -108,7 +108,7 @@ const importData = async () => {
                 price: 4.50,
                 quantity: 0,
                 description: 'Flaky, golden French croissants made with real butter.',
-                image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80'
+                image: '/Pastry.png'
             },
             {
                 name: 'Fruit Tart',
@@ -116,7 +116,7 @@ const importData = async () => {
                 price: 32.00,
                 quantity: 8,
                 description: 'Buttery tart shell filled with vanilla custard and topped with fresh seasonal fruit.',
-                image: 'https://images.unsplash.com/photo-1563729768640-d36d4f642c67?w=800&q=80'
+                image: '/Fruit.png'
             },
             {
                 name: 'Danish Pastry',
@@ -124,7 +124,7 @@ const importData = async () => {
                 price: 5.50,
                 quantity: 12,
                 description: 'Sweet pastry with fruit or custard filling.',
-                image: 'https://images.unsplash.com/photo-1616480536761-ec8587ce90b2?w=800&q=80'
+                image: '/Danish.png'
             },
 
             // Ice Cream
@@ -142,7 +142,7 @@ const importData = async () => {
                 price: 7.50,
                 quantity: 15,
                 description: 'Refreshing dairy-free sorbet made with ripe strawberries.',
-                image: 'https://images.unsplash.com/photo-1563477710522-8367099e9fd2?w=800&q=80'
+                image: '/Sorbet.png'
             },
 
             // Candies
