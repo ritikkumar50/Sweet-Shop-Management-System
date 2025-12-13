@@ -12,6 +12,36 @@ exports.getSweets = async (req, res, next) => {
     }
 };
 
+// @desc    Search sweets
+// @route   GET /api/sweets/search
+// @access  Public
+exports.searchSweets = async (req, res, next) => {
+    try {
+        const { name, category, minPrice, maxPrice } = req.query;
+        let query = {};
+
+        if (name) {
+            query.name = { $regex: name, $options: 'i' };
+        }
+
+        if (category) {
+            query.category = category;
+        }
+
+        if (minPrice || maxPrice) {
+            query.price = {};
+            if (minPrice) query.price.$gte = minPrice;
+            if (maxPrice) query.price.$lte = maxPrice;
+        }
+
+        const sweets = await Sweet.find(query);
+
+        res.status(200).json({ success: true, count: sweets.length, data: sweets });
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+};
+
 // @desc    Get single sweet
 // @route   GET /api/sweets/:id
 // @access  Public
@@ -91,7 +121,7 @@ exports.purchaseSweet = async (req, res, next) => {
         const qtyToBuy = quantity || 1;
 
         if (qtyToBuy < 1) {
-             return res.status(400).json({ success: false, message: 'Quantity must be at least 1' });
+            return res.status(400).json({ success: false, message: 'Quantity must be at least 1' });
         }
 
         const sweet = await Sweet.findById(req.params.id);
@@ -105,6 +135,33 @@ exports.purchaseSweet = async (req, res, next) => {
         }
 
         sweet.quantity -= qtyToBuy;
+        await sweet.save();
+
+        res.status(200).json({ success: true, data: sweet });
+    } catch (err) {
+        res.status(400).json({ success: false, message: err.message });
+    }
+};
+
+// @desc    Restock sweet (increase stock)
+// @route   POST /api/sweets/:id/restock
+// @access  Private (Admin)
+exports.restockSweet = async (req, res, next) => {
+    try {
+        const { quantity } = req.body;
+        const qtyToAdd = quantity || 0;
+
+        if (qtyToAdd < 1) {
+            return res.status(400).json({ success: false, message: 'Quantity must be at least 1' });
+        }
+
+        const sweet = await Sweet.findById(req.params.id);
+
+        if (!sweet) {
+            return res.status(404).json({ success: false, message: `Sweet not found` });
+        }
+
+        sweet.quantity += qtyToAdd;
         await sweet.save();
 
         res.status(200).json({ success: true, data: sweet });

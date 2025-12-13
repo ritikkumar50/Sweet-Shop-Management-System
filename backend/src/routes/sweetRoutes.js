@@ -5,7 +5,9 @@ const {
     createSweet,
     updateSweet,
     deleteSweet,
-    purchaseSweet
+    purchaseSweet,
+    searchSweets,
+    restockSweet
 } = require('../controllers/sweetController');
 const { protect, authorize } = require('../middleware/authMiddleware');
 
@@ -15,6 +17,9 @@ router.route('/')
     .get(getSweets)
     .post(protect, authorize('admin'), createSweet);
 
+router.route('/search')
+    .get(searchSweets);
+
 router.route('/:id')
     .get(getSweet)
     .put(protect, authorize('admin'), updateSweet)
@@ -22,5 +27,8 @@ router.route('/:id')
 
 router.route('/:id/purchase')
     .post(protect, purchaseSweet);
+
+router.route('/:id/restock')
+    .post(protect, authorize('admin'), restockSweet);
 
 module.exports = router;

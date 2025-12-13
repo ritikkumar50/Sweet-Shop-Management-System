@@ -83,4 +83,41 @@ describe('Inventory Endpoints', () => {
             expect(res.statusCode).toBe(400);
         });
     });
+
+    describe('POST /api/sweets/:id/restock', () => {
+        let adminToken;
+
+        beforeEach(async () => {
+            // Create Admin for this test block
+            const admin = await User.create({
+                name: 'Admin Restock',
+                email: 'admin.restock@example.com',
+                password: 'password123',
+                role: 'admin'
+            });
+            const resAdmin = await request(app).post('/api/auth/login').send({ email: 'admin.restock@example.com', password: 'password123' });
+            adminToken = resAdmin.body.token;
+        });
+
+        it('should increase quantity if admin', async () => {
+            const sweet = await Sweet.create(mockSweet);
+            const res = await request(app)
+                .post(`/api/sweets/${sweet._id}/restock`)
+                .set('Authorization', `Bearer ${adminToken}`)
+                .send({ quantity: 10 });
+
+            expect(res.statusCode).toBe(200);
+            expect(res.body.data.quantity).toBe(15); // 5 + 10
+        });
+
+        it('should fail if not admin', async () => {
+            const sweet = await Sweet.create(mockSweet);
+            const res = await request(app)
+                .post(`/api/sweets/${sweet._id}/restock`)
+                .set('Authorization', `Bearer ${userToken}`)
+                .send({ quantity: 10 });
+
+            expect(res.statusCode).toBe(403);
+        });
+    });
 });

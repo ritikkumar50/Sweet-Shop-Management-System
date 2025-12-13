@@ -82,6 +82,36 @@ describe('Sweets Endpoints', () => {
         });
     });
 
+    describe('GET /api/sweets/search', () => {
+        beforeEach(async () => {
+            await Sweet.create([
+                { ...mockSweet, name: 'Choco Cake', category: 'Cakes', price: 15 },
+                { ...mockSweet, name: 'Vanilla Pastry', category: 'Pastries', price: 5 },
+                { ...mockSweet, name: 'Choco Bar', category: 'Chocolates', price: 2 }
+            ]);
+        });
+
+        it('should search by name', async () => {
+            const res = await request(app).get('/api/sweets/search?name=Choco');
+            expect(res.statusCode).toBe(200);
+            expect(res.body.count).toBe(2); // Choco Cake, Choco Bar
+        });
+
+        it('should filter by category', async () => {
+            const res = await request(app).get('/api/sweets/search?category=Cakes');
+            expect(res.statusCode).toBe(200);
+            expect(res.body.count).toBe(1);
+            expect(res.body.data[0].name).toBe('Choco Cake');
+        });
+
+        it('should filter by price range', async () => {
+            const res = await request(app).get('/api/sweets/search?minPrice=3&maxPrice=10');
+            expect(res.statusCode).toBe(200);
+            expect(res.body.count).toBe(1);
+            expect(res.body.data[0].name).toBe('Vanilla Pastry');
+        });
+    });
+
     describe('PUT /api/sweets/:id', () => {
         it('should update sweet if admin', async () => {
             const sweet = await Sweet.create(mockSweet);
