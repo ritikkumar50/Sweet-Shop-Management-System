@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import api from '../api/client';
 import SweetCard from '../components/features/SweetCard';
 import Input from '../components/ui/Input';
 import { Search, Filter, Loader2, SlidersHorizontal, ChevronDown } from 'lucide-react';
@@ -11,19 +12,23 @@ const Shop = () => {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [priceRange, setPriceRange] = useState(100);
 
-    // Simulate API fetch
+    // Fetch from API
     useEffect(() => {
         const fetchSweets = async () => {
             setLoading(true);
-            setTimeout(() => {
-                setSweets(mockSweets);
+            try {
+                const { data } = await api.get('/sweets');
+                setSweets(data.data);
+            } catch (error) {
+                console.error('Error fetching sweets:', error);
+            } finally {
                 setLoading(false);
-            }, 800);
+            }
         };
         fetchSweets();
     }, []);
 
-    const categories = ['All', ...new Set(mockSweets.map(s => s.category))];
+    const categories = ['All', ...new Set(sweets.map(s => s.category))];
 
     const filteredSweets = sweets.filter(sweet => {
         const matchesSearch = sweet.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -32,8 +37,22 @@ const Shop = () => {
         return matchesSearch && matchesCategory && matchesPrice;
     });
 
-    const handlePurchase = (sweet, quantity) => {
-        alert(`Added ${quantity} x ${sweet.name} to cart! (This is a demo)`);
+    const handlePurchase = async (sweet, quantity) => {
+        try {
+            const { data } = await api.post(`/sweets/${sweet._id}/purchase`, { quantity });
+
+            // Update local state to reflect new quantity immediately
+            setSweets(prevSweets =>
+                prevSweets.map(s =>
+                    s._id === sweet._id ? { ...s, quantity: data.data.quantity } : s
+                )
+            );
+
+            alert(`Successfully purchased ${quantity} x ${sweet.name}!`);
+        } catch (error) {
+            console.error('Purchase error:', error);
+            alert(error.response?.data?.message || 'Failed to purchase sweet');
+        }
     };
 
     if (loading) {
@@ -59,8 +78,22 @@ const Shop = () => {
                     {/* Sidebar Filters */}
                     <div className="w-full lg:w-72 flex-shrink-0">
                         <div className="bg-white dark:bg-slate-800 p-6 rounded-2xl sticky top-24 border border-gray-100 dark:border-slate-700">
-                            <div className="flex items-center gap-2 mb-6 text-[#4A3B32] dark:text-white font-serif font-bold text-xl">
-                                <SlidersHorizontal className="w-5 h-5" /> Filters
+                            <div className="flex items-center justify-between mb-6">
+                                <div className="flex items-center gap-2 text-[#4A3B32] dark:text-white font-serif font-bold text-xl">
+                                    <SlidersHorizontal className="w-5 h-5" /> Filters
+                                </div>
+                                {(searchTerm || selectedCategory !== 'All' || priceRange !== 100) && (
+                                    <button
+                                        onClick={() => {
+                                            setSearchTerm('');
+                                            setSelectedCategory('All');
+                                            setPriceRange(100);
+                                        }}
+                                        className="text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+                                    >
+                                        Clear All
+                                    </button>
+                                )}
                             </div>
 
                             <div className="space-y-8">
@@ -129,7 +162,7 @@ const Shop = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                                 {filteredSweets.map(sweet => (
                                     <SweetCard
-                                        key={sweet.id}
+                                        key={sweet._id}
                                         sweet={sweet}
                                         onPurchase={handlePurchase}
                                     />

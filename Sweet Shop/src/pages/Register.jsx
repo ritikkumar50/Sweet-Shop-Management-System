@@ -25,7 +25,7 @@ const Register = () => {
             await register(formData.name, formData.email, formData.password);
             navigate('/');
         } catch (err) {
-            setError('Failed to create an account');
+            setError(err.response?.data?.message || 'Failed to create an account');
         }
     };
 

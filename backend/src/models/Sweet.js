@@ -10,7 +10,7 @@ const sweetSchema = new mongoose.Schema({
     category: {
         type: String,
         required: [true, 'Please add a category'],
-        enum: ['Cakes', 'Chocolates', 'Pastries', 'Candies', 'Cookies', 'Other']
+        enum: ['Cakes', 'Chocolates', 'Pastries', 'Candies', 'Cookies', 'Ice Cream', 'Donuts', 'Macarons', 'Other']
     },
     price: {
         type: Number,
