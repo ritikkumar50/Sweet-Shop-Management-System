@@ -66,4 +66,38 @@ describe('Auth (e2e)', () => {
                 .expect(409); // Conflict
         });
     });
+
+    describe('/auth/login (POST)', () => {
+        it('should login and return JWT token', async () => {
+            // First register
+            const email = 'login@example.com';
+            const password = 'password123';
+            await request(app.getHttpServer())
+                .post('/auth/register')
+                .send({ email, password })
+                .expect(201);
+
+            // Then login
+            const response = await request(app.getHttpServer())
+                .post('/auth/login')
+                .send({ email, password })
+                .expect(201); // NestJS defaults POST to 201
+
+            expect(response.body).toHaveProperty('access_token');
+        });
+
+        it('should fail with invalid credentials', async () => {
+            const email = 'login_fail@example.com';
+            const password = 'password123';
+            await request(app.getHttpServer())
+                .post('/auth/register')
+                .send({ email, password })
+                .expect(201);
+
+            return request(app.getHttpServer())
+                .post('/auth/login')
+                .send({ email, password: 'wrongpassword' })
+                .expect(401);
+        });
+    });
 });
