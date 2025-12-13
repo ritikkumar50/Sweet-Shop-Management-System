@@ -4,6 +4,15 @@
 
 @layer base {
   body {
-    @apply bg-slate-50 text-slate-900 font-sans antialiased dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300;
+    @apply bg-[#FFFBF9] text-[#4A3B32] font-sans antialiased dark:bg-slate-900 dark:text-slate-100 transition-colors duration-300;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
   }
 }

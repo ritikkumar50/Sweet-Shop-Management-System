@@ -1,43 +1,46 @@
-import { twMerge } from 'tailwind-merge';
-import { clsx } from 'clsx';
 import { Loader2 } from 'lucide-react';
+import { clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
 
 const Button = ({
     children,
     variant = 'primary',
     size = 'md',
-    className,
     isLoading = false,
-    disabled,
-    type = 'button',
     icon: Icon,
+    className,
+    disabled,
     ...props
 }) => {
-    const baseStyles = 'inline-flex items-center justify-center rounded-full font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-95';
+
+    const baseStyles = "inline-flex items-center justify-center font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transform active:scale-[0.98]";
 
     const variants = {
-        primary: 'bg-primary text-white hover:bg-pink-600 focus:ring-primary shadow-md hover:shadow-lg',
-        secondary: 'bg-secondary text-white hover:bg-teal-500 focus:ring-secondary shadow-md',
-        outline: 'border-2 border-primary text-primary hover:bg-pink-50 focus:ring-primary',
-        ghost: 'text-gray-600 hover:bg-gray-100 hover:text-gray-900',
-        danger: 'bg-red-500 text-white hover:bg-red-600 focus:ring-red-500 shadow-md',
+        primary: "bg-primary text-white hover:bg-[#E5633A] focus:ring-primary shadow-lg hover:shadow-xl dark:focus:ring-offset-slate-900 border border-transparent",
+        secondary: "bg-secondary text-primary hover:bg-orange-100 focus:ring-primary shadow-sm hover:shadow-md dark:bg-slate-700 dark:text-white dark:hover:bg-slate-600 border border-transparent",
+        outline: "bg-transparent border-2 border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary dark:border-primary dark:text-primary dark:hover:bg-primary dark:hover:text-white",
+        ghost: "bg-transparent text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-slate-800 focus:ring-gray-500",
+        danger: "bg-red-500 text-white hover:bg-red-600 focus:ring-red-500 shadow-md hover:shadow-lg",
     };
 
     const sizes = {
-        sm: 'text-sm px-3 py-1.5',
-        md: 'text-sm px-5 py-2.5',
-        lg: 'text-base px-6 py-3',
+        sm: "px-4 py-1.5 text-xs rounded-full",
+        md: "px-6 py-2.5 text-sm rounded-full",
+        lg: "px-8 py-4 text-base rounded-full",
+        icon: "p-2 rounded-full",
     };
 
     return (
         <button
-            type={type}
-            className={twMerge(clsx(baseStyles, variants[variant], sizes[size], className))}
+            className={twMerge(baseStyles, variants[variant], sizes[size], className)}
             disabled={disabled || isLoading}
             {...props}
         >
-            {isLoading && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}
-            {!isLoading && Icon && <Icon className="w-4 h-4 mr-2" />}
+            {isLoading ? (
+                <Loader2 className="w-5 h-5 animate-spin mr-2" />
+            ) : Icon ? (
+                <Icon className={clsx("w-5 h-5", children ? "mr-2" : "")} />
+            ) : null}
             {children}
         </button>
     );

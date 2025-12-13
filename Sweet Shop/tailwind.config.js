@@ -8,12 +8,14 @@ export default {
     theme: {
         extend: {
             colors: {
-                primary: '#ec4899', // Pink
-                secondary: '#2dd4bf', // Teal
-                accent: '#f59e0b', // Amber
+                primary: '#F2744B', // Coral Orange
+                secondary: '#FFF5F2', // Soft Peach
+                accent: '#4A3B32', // Dark Artisan Brown
+                surface: '#FFFBF9', // Warm White
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],
+                serif: ['Playfair Display', 'serif'],
             }
         },
     },
