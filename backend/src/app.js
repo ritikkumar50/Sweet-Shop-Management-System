@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
     res.json({ message: 'Sweet Shop API is running' });
 });
 
+// Routes
+app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/sweets', require('./routes/sweetRoutes'));
+
 // Error Handling Middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
