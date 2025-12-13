@@ -1,10 +1,12 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { useCart } from '../../context/CartContext';
 import ThemeToggle from './ThemeToggle';
-import { LogOut, Cake } from 'lucide-react';
+import { LogOut, Cake, ShoppingCart } from 'lucide-react';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
+    const { totalItems } = useCart();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -34,6 +36,14 @@ const Navbar = () => {
 
                     {/* Right Actions */}
                     <div className="flex items-center gap-6">
+                        <Link to="/cart" className="relative group p-2">
+                            <ShoppingCart className="w-6 h-6 text-gray-600 dark:text-gray-300 group-hover:text-primary transition-colors" />
+                            {totalItems > 0 && (
+                                <span className="absolute -top-1 -right-1 bg-primary text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-md animate-in zoom-in">
+                                    {totalItems}
+                                </span>
+                            )}
+                        </Link>
                         <ThemeToggle />
 
                         {user ? (

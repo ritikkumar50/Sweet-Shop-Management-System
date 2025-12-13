@@ -41,6 +41,7 @@ const SweetCard = ({ sweet, onPurchase }) => {
                         {sweet.name}
                     </h3>
                     <p className="text-sm text-gray-500 font-medium uppercase tracking-wide">{sweet.category}</p>
+                    {!isOutOfStock && <p className="text-xs text-green-600 dark:text-green-400 font-bold mt-1">Available: {sweet.quantity}</p>}
                 </div>
 
                 <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed mb-6 flex-grow">
@@ -79,7 +80,7 @@ const SweetCard = ({ sweet, onPurchase }) => {
                     disabled={isOutOfStock}
                     onClick={() => onPurchase(sweet, purchaseQty)}
                 >
-                    {isOutOfStock ? 'Out of Stock' : 'Purchase'}
+                    {isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
                 </Button>
             </div>
         </div>

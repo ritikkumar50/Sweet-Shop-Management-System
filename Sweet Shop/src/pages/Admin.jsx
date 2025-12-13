@@ -1,17 +1,34 @@
-import { useState } from 'react';
-import { mockSweets } from '../data/mockData';
+import { useState, useEffect } from 'react';
+import api from '../api/client';
 import Button from '../components/ui/Button';
 import Input from '../components/ui/Input';
-import { Plus, Pencil, Trash2, X, Save, Image as ImageIcon } from 'lucide-react';
+import { Plus, Pencil, Trash2, X, Save, Image as ImageIcon, Loader2 } from 'lucide-react';
 
 const Admin = () => {
-    const [sweets, setSweets] = useState(mockSweets);
+    const [sweets, setSweets] = useState([]);
+    const [loading, setLoading] = useState(true);
     const [isEditing, setIsEditing] = useState(false);
     const [currentSweet, setCurrentSweet] = useState(null);
 
     // Form State
     const initialFormState = { name: '', description: '', price: '', quantity: '', image: '', category: '' };
     const [formData, setFormData] = useState(initialFormState);
+
+    const fetchSweets = async () => {
+        setLoading(true);
+        try {
+            const { data } = await api.get('/sweets');
+            setSweets(data.data);
+        } catch (error) {
+            console.error('Error fetching sweets:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchSweets();
+    }, []);
 
     const handleEdit = (sweet) => {
         setIsEditing(true);
@@ -28,9 +45,15 @@ const Admin = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this sweet?')) {
-            setSweets(sweets.filter(s => s.id !== id));
+            try {
+                await api.delete(`/sweets/${id}`);
+                setSweets(sweets.filter(s => s._id !== id));
+            } catch (error) {
+                console.error('Delete error:', error);
+                alert('Failed to delete sweet');
+            }
         }
     };
 
@@ -40,23 +63,24 @@ const Admin = () => {
         setFormData(initialFormState);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (isEditing && currentSweet) {
-            // Update
-            setSweets(sweets.map(s => s.id === currentSweet.id ? { ...s, ...formData, price: Number(formData.price), quantity: Number(formData.quantity) } : s));
-        } else {
-            // Create
-            const newSweet = {
-                id: Date.now(), // simple ID gen
-                ...formData,
-                price: Number(formData.price),
-                quantity: Number(formData.quantity)
-            };
-            setSweets([newSweet, ...sweets]);
+        try {
+            if (isEditing && currentSweet) {
+                // Update
+                const { data } = await api.put(`/sweets/${currentSweet._id}`, formData);
+                setSweets(sweets.map(s => s._id === currentSweet._id ? data.data : s));
+            } else {
+                // Create
+                const { data } = await api.post('/sweets', formData);
+                setSweets([data.data, ...sweets]);
+            }
+            handleCancel();
+        } catch (error) {
+            console.error('Save error:', error);
+            alert(error.response?.data?.message || 'Failed to save sweet');
         }
-        handleCancel();
     };
 
     return (
@@ -152,7 +176,7 @@ const Admin = () => {
                     {/* List Section */}
                     <div className="lg:col-span-2 space-y-4">
                         {sweets.map(sweet => (
-                            <div key={sweet.id} className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row gap-4 items-start sm:items-center hover:shadow-md transition-shadow">
+                            <div key={sweet._id} className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row gap-4 items-start sm:items-center hover:shadow-md transition-shadow">
                                 <img
                                     src={sweet.image}
                                     alt={sweet.name}
@@ -178,7 +202,7 @@ const Admin = () => {
                                     <Button size="sm" variant="ghost" onClick={() => handleEdit(sweet)} className="text-gray-500 dark:text-gray-400 dark:hover:bg-slate-700">
                                         <Pencil className="w-4 h-4" />
                                     </Button>
-                                    <Button size="sm" variant="ghost" className="hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 dark:text-red-400" onClick={() => handleDelete(sweet.id)}>
+                                    <Button size="sm" variant="ghost" className="hover:bg-red-50 dark:hover:bg-red-900/20 text-red-500 dark:text-red-400" onClick={() => handleDelete(sweet._id)}>
                                         <Trash2 className="w-4 h-4" />
                                     </Button>
                                 </div>

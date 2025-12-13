@@ -1,5 +1,8 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import api from '../api/client';
+import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import SweetCard from '../components/features/SweetCard';
 import Input from '../components/ui/Input';
 import { Search, Filter, Loader2, SlidersHorizontal, ChevronDown } from 'lucide-react';
@@ -37,22 +40,23 @@ const Shop = () => {
         return matchesSearch && matchesCategory && matchesPrice;
     });
 
-    const handlePurchase = async (sweet, quantity) => {
-        try {
-            const { data } = await api.post(`/sweets/${sweet._id}/purchase`, { quantity });
+    const { addToCart, cart } = useCart();
+    const { user } = useAuth();
+    const navigate = useNavigate();
 
-            // Update local state to reflect new quantity immediately
-            setSweets(prevSweets =>
-                prevSweets.map(s =>
-                    s._id === sweet._id ? { ...s, quantity: data.data.quantity } : s
-                )
-            );
-
-            alert(`Successfully purchased ${quantity} x ${sweet.name}!`);
-        } catch (error) {
-            console.error('Purchase error:', error);
-            alert(error.response?.data?.message || 'Failed to purchase sweet');
+    const handleAddToCart = (sweet, quantity) => {
+        if (!user) {
+            navigate('/login');
+            return;
         }
+        addToCart(sweet, quantity);
+        alert(`Added ${quantity} x ${sweet.name} to cart!`);
+    };
+
+    const getAdjustedQuantity = (sweet) => {
+        const cartItem = cart.find(item => item._id === sweet._id);
+        const inCartQty = cartItem ? cartItem.quantity : 0;
+        return Math.max(0, sweet.quantity - inCartQty);
     };
 
     if (loading) {
@@ -160,13 +164,16 @@ const Shop = () => {
                     <div className="flex-grow">
                         {filteredSweets.length > 0 ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                                {filteredSweets.map(sweet => (
-                                    <SweetCard
-                                        key={sweet._id}
-                                        sweet={sweet}
-                                        onPurchase={handlePurchase}
-                                    />
-                                ))}
+                                {filteredSweets.map(sweet => {
+                                    const adjustedSweet = { ...sweet, quantity: getAdjustedQuantity(sweet) };
+                                    return (
+                                        <SweetCard
+                                            key={sweet._id}
+                                            sweet={adjustedSweet}
+                                            onPurchase={handleAddToCart}
+                                        />
+                                    );
+                                })}
                             </div>
                         ) : (
                             <div className="text-center py-20 bg-white dark:bg-slate-800 rounded-3xl border border-dashed border-gray-200 dark:border-slate-700">
