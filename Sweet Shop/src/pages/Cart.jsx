@@ -3,8 +3,10 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/client';
 import Button from '../components/ui/Button';
+import LottieLoader from '../components/ui/LottieLoader';
 import { Trash2, Minus, Plus, ShoppingCart } from 'lucide-react';
 import { useState } from 'react';
+import TruckAnimation from '../assets/animations/Truck.json';
 
 const Cart = () => {
     const { cart, removeFromCart, updateQuantity, clearCart, totalPrice } = useCart();
@@ -134,6 +136,18 @@ const Cart = () => {
                         </div>
                     </div>
                 </div>
+
+                {/* Loading Overlay with Truck Animation */}
+                {loading && (
+                    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+                        <div className="bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-2xl">
+                            <LottieLoader animationData={TruckAnimation} size={300} />
+                            <p className="text-center mt-4 text-lg font-medium text-gray-700 dark:text-gray-300">
+                                Processing your order...
+                            </p>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

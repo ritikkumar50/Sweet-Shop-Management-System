@@ -5,8 +5,10 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import SweetCard from '../components/features/SweetCard';
 import Input from '../components/ui/Input';
+import LottieLoader from '../components/ui/LottieLoader';
 import { Search, Filter, Loader2, SlidersHorizontal, ChevronDown, ShoppingCart } from 'lucide-react';
 import { mockSweets } from '../data/mockData';
+import FoodLoadingAnimation from '../assets/animations/FoodLoading.json';
 
 const Shop = () => {
     const [sweets, setSweets] = useState([]);
@@ -62,8 +64,11 @@ const Shop = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center dark:bg-slate-900 transition-colors duration-300">
-                <Loader2 className="w-8 h-8 text-primary animate-spin" />
+            <div className="min-h-screen flex flex-col items-center justify-center dark:bg-slate-900 transition-colors duration-300">
+                <LottieLoader animationData={FoodLoadingAnimation} size={250} />
+                <p className="mt-4 text-lg font-medium text-gray-700 dark:text-gray-300">
+                    Loading delicious sweets...
+                </p>
             </div>
         );
     }
