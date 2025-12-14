@@ -12,11 +12,10 @@ const Home = () => {
                         <span className="text-base font-semibold text-accent tracking-wide uppercase font-serif">Artisan sweets, made with love</span>
                     </div>
                     <h1 className="text-6xl md:text-8xl font-serif text-[#4A3B32] dark:text-white mb-8 leading-tight">
-                        Indulge in <span className="text-primary italic">Sweet</span> Perfection
+                        Parampara Ki  <span className="text-primary italic">Mithai</span> , Aaj Ke Andaaz Mei
                     </h1>
                     <p className="text-xl md:text-2xl text-[#6D5D54] dark:text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-                        Discover our handcrafted collection of cakes, chocolates, pastries, and more.
-                        Every bite is a moment of pure bliss.
+                       Pure Desi Ghee Mithai for Every Festival & Celebration
                     </p>
                     <div className="flex flex-col sm:flex-row gap-6 justify-center">
                         <Link
@@ -44,7 +43,7 @@ const Home = () => {
             {/* Features Section */}
             <div className="py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl font-serif text-[#4A3B32] dark:text-white mb-4">Why Choose Sweet Delights?</h2>
+                    <h2 className="text-4xl font-serif text-[#4A3B32] dark:text-white mb-4">Why Choose Parampara Sweets</h2>
                     <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">We're not just a sweet shop - we're artisans dedicated to creating unforgettable taste experiences.</p>
                 </div>
 
@@ -139,9 +138,9 @@ const Home = () => {
                 <div className="max-w-7xl mx-auto px-4 text-center sm:flex justify-between items-center text-gray-500 dark:text-gray-500 text-sm">
                     <div className="flex items-center justify-center gap-2 mb-4 sm:mb-0">
                         <Cake className="w-5 h-5 text-primary" />
-                        <span className="font-serif font-bold text-[#4A3B32] dark:text-gray-300 text-lg">Sweet Delights</span>
+                        <span className="font-serif font-bold text-[#4A3B32] dark:text-gray-300 text-lg">Parampara Sweets</span>
                     </div>
-                    <p>© 2024 Sweet Delights. All rights reserved.</p>
+                    <p>© 2024 Parampara Sweets. All rights reserved.</p>
                 </div>
             </footer>
         </div>

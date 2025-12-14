@@ -36,7 +36,7 @@ const Login = () => {
                 <div className="text-center mb-10">
                     <Link to="/" className="inline-flex items-center gap-2 group mb-6">
                         <Cake className="w-8 h-8 text-primary" />
-                        <span className="font-serif font-bold text-3xl text-accent dark:text-white">Sweet Delights</span>
+                        <span className="font-serif font-bold text-3xl text-accent dark:text-white">Parampara Sweets</span>
                     </Link>
                     <h2 className="text-4xl font-serif font-bold text-accent dark:text-white mb-2">
                         Welcome Back
