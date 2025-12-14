@@ -1,6 +1,8 @@
-# Sweet Shop Management System
+# Parampara Sweets - Sweet Shop Management System
 
-A modern, full-stack web application designed for managing a sweet shop. This system provides a seamless experience for customers to browse and purchase sweets, while offering robust backend support for order and product management.
+**Live Demo:** [https://sweet-shop-management-system-ten.vercel.app/](https://sweet-shop-management-system-ten.vercel.app/)
+
+A modern, full-stack web application designed for managing **Parampara Sweets**. This system provides a seamless experience for customers to browse and purchase authentic Indian sweets, while offering robust backend support for order and product management.
 
 ## 🚀 Features
 
