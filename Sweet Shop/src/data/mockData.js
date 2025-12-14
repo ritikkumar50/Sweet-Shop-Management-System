@@ -1,157 +1,155 @@
 export const mockSweets = [
-    // Cakes
+    // Milk-based Sweets
     {
         id: 1,
-        name: 'Red Velvet Cake',
-        category: 'Cakes',
-        price: 45.99,
-        quantity: 15,
-        description: 'A luxurious red velvet cake with cream cheese frosting.',
-        image: 'https://images.unsplash.com/photo-1586788680434-30d3244363c3?w=800&q=80'
+        name: 'Gulab Jamun',
+        category: 'Milk-based Sweets',
+        price: 120.00,
+        quantity: 50,
+        description: 'Soft, spongy milk-solid balls soaked in fragrant rose-cardamom syrup. A classic Indian dessert.',
+        image: '/images/sweets/gulab_jamun.png'
     },
     {
         id: 2,
-        name: 'Tiramisu Slice',
-        category: 'Cakes',
-        price: 9.50,
-        quantity: 20,
-        description: 'Classic Italian dessert with espresso-soaked ladyfingers.',
-        image: 'https://images.unsplash.com/photo-1571115177098-24ec42ed204d?w=800&q=80'
+        name: 'Rasgulla',
+        category: 'Milk-based Sweets',
+        price: 100.00,
+        quantity: 40,
+        description: 'Soft, white cottage cheese balls cooked in light sugar syrup. A Bengali specialty.',
+        image: '/images/sweets/rasgulla.png'
     },
     {
         id: 3,
-        name: 'Classic Cheesecake',
-        category: 'Cakes',
-        price: 35.00,
-        quantity: 10,
-        description: 'Rich and creamy New York style cheesecake.',
-        image: 'https://images.unsplash.com/photo-1524351199678-941a58a3df50?w=800&q=80'
+        name: 'Rasmalai',
+        category: 'Milk-based Sweets',
+        price: 150.00,
+        quantity: 30,
+        description: 'Delicate cottage cheese patties soaked in sweetened, thickened milk flavored with cardamom and saffron.',
+        image: '/images/sweets/rasmalai.png'
     },
-
-    // Cookies
     {
         id: 4,
-        name: 'Macaron Box',
-        category: 'Cookies',
-        price: 24.00,
-        quantity: 30,
-        description: 'Delicate French macarons in assorted flavors.',
-        image: 'https://images.unsplash.com/photo-1569864358642-9d1684040f43?w=800&q=80'
+        name: 'Sandesh',
+        category: 'Milk-based Sweets',
+        price: 130.00,
+        quantity: 35,
+        description: 'Traditional Bengali sweet made from fresh cottage cheese and sugar, delicately flavored.',
+        image: '/images/sweets/sandesh.png'
     },
+
+    // Dry Sweets
     {
         id: 5,
-        name: 'Almond Biscotti',
-        category: 'Cookies',
-        price: 15.00,
+        name: 'Kaju Katli',
+        category: 'Dry Sweets',
+        price: 450.00,
         quantity: 25,
-        description: 'Crunchy Italian cookies perfect for dipping.',
-        image: 'https://images.unsplash.com/photo-1599785209796-786432b228bc?w=800&q=80'
+        description: 'Premium cashew fudge with a thin silver leaf. The king of Indian sweets.',
+        image: '/images/sweets/kaju_katli.png'
     },
     {
         id: 6,
-        name: 'Chocolate Chip Cookies',
-        category: 'Cookies',
-        price: 12.99,
-        quantity: 50,
-        description: 'Chewy cookies loaded with semi-sweet chocolate.',
-        image: 'https://images.unsplash.com/photo-1499636138143-bd649043ea52?w=800&q=80'
+        name: 'Barfi (Milk Cake)',
+        category: 'Dry Sweets',
+        price: 180.00,
+        quantity: 40,
+        description: 'Dense, sweet confection made from condensed milk and sugar, available in various flavors.',
+        image: '/images/sweets/barfi.png'
     },
-
-    // Chocolates
     {
         id: 7,
-        name: 'Dark Chocolate Bar',
-        category: 'Chocolates',
-        price: 7.99,
-        quantity: 40,
-        description: '72% cacao single-origin dark chocolate.',
-        image: 'https://images.unsplash.com/photo-1548907040-4baa42d10919?w=800&q=80'
+        name: 'Besan Ladoo',
+        category: 'Dry Sweets',
+        price: 160.00,
+        quantity: 45,
+        description: 'Round sweet balls made from gram flour, ghee, and sugar. A festive favorite.',
+        image: '/images/sweets/besan_ladoo.png'
     },
     {
         id: 8,
-        name: 'Chocolate Truffles',
-        category: 'Chocolates',
-        price: 28.50,
-        quantity: 18,
-        description: 'Handcrafted Belgian chocolate truffles.',
-        image: 'https://images.unsplash.com/photo-1548741487-18d363dc4469?w=800&q=80'
+        name: 'Peda',
+        category: 'Dry Sweets',
+        price: 140.00,
+        quantity: 50,
+        description: 'Soft, round sweet made from khoya (reduced milk) and flavored with cardamom.',
+        image: '/images/sweets/peda.png'
     },
     {
         id: 9,
-        name: 'Salted Caramel Fudge',
-        category: 'Chocolates',
-        price: 12.99,
-        quantity: 25,
-        description: 'Melt-in-your-mouth fudge with sweet and salty balance.',
-        image: 'https://images.unsplash.com/photo-1582294406568-356c9a41925b?w=800&q=80'
+        name: 'Mysore Pak',
+        category: 'Dry Sweets',
+        price: 200.00,
+        quantity: 30,
+        description: 'Rich, buttery sweet from Karnataka made with gram flour, ghee, and sugar.',
+        image: '/images/sweets/mysore_pak.png'
     },
-
-    // Pastries
     {
         id: 10,
-        name: 'Butter Croissants',
-        category: 'Pastries',
-        price: 4.50,
-        quantity: 0,
-        description: 'Flaky, golden French croissants.',
-        image: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?w=800&q=80'
+        name: 'Soan Papdi',
+        category: 'Dry Sweets',
+        price: 110.00,
+        quantity: 60,
+        description: 'Flaky, crispy sweet with a melt-in-mouth texture made from gram flour and sugar.',
+        image: '/images/sweets/soan_papdi.png'
     },
+
+    // Syrup-based Sweets
     {
         id: 11,
-        name: 'Fruit Tart',
-        category: 'Pastries',
-        price: 32.00,
-        quantity: 8,
-        description: 'Buttery tart shell filled with custard and fruit.',
-        image: 'https://images.unsplash.com/photo-1563729768640-d36d4f642c67?w=800&q=80'
+        name: 'Jalebi',
+        category: 'Syrup-based Sweets',
+        price: 80.00,
+        quantity: 70,
+        description: 'Crispy, spiral-shaped sweet soaked in sugar syrup. Best enjoyed warm.',
+        image: '/images/sweets/jalebi.png'
     },
     {
         id: 12,
-        name: 'Danish Pastry',
-        category: 'Pastries',
-        price: 5.50,
-        quantity: 12,
-        description: 'Sweet pastry with fruit filling.',
-        image: 'https://images.unsplash.com/photo-1616480536761-ec8587ce90b2?w=800&q=80'
+        name: 'Imarti',
+        category: 'Syrup-based Sweets',
+        price: 90.00,
+        quantity: 50,
+        description: 'Flower-shaped sweet made from lentil batter, deep-fried and soaked in saffron syrup.',
+        image: '/images/sweets/imarti.png'
     },
 
-    // Ice Cream
+    // Halwa & Puddings
     {
         id: 13,
-        name: 'Vanilla Bean Gelato',
-        category: 'Ice Cream',
-        price: 8.99,
-        quantity: 20,
-        description: 'Creamy Italian gelato with Madagascar vanilla.',
-        image: 'https://images.unsplash.com/photo-1576506295286-5cda18df43e7?w=800&q=80'
+        name: 'Gajar Halwa',
+        category: 'Halwa & Puddings',
+        price: 170.00,
+        quantity: 35,
+        description: 'Warm carrot pudding cooked with milk, ghee, and garnished with nuts. A winter delicacy.',
+        image: '/images/sweets/gajar_halwa.png'
     },
     {
         id: 14,
-        name: 'Strawberry Sorbet',
-        category: 'Ice Cream',
-        price: 7.50,
-        quantity: 15,
-        description: 'Refreshing dairy-free strawberry sorbet.',
-        image: 'https://images.unsplash.com/photo-1563477710522-8367099e9fd2?w=800&q=80'
+        name: 'Moong Dal Halwa',
+        category: 'Halwa & Puddings',
+        price: 190.00,
+        quantity: 25,
+        description: 'Rich, aromatic halwa made from yellow lentils, ghee, and sugar. Labor of love.',
+        image: '/images/sweets/moong_dal_halwa.png'
     },
 
-    // Candies
+    // Frozen Desserts
     {
         id: 15,
-        name: 'Gummy Bears Mix',
-        category: 'Candies',
-        price: 5.99,
-        quantity: 100,
-        description: 'Assorted fruit-flavored gummy bears.',
-        image: 'https://images.unsplash.com/photo-1582058091505-f87a2e55a40f?w=800&q=80'
+        name: 'Kulfi (Malai)',
+        category: 'Frozen Desserts',
+        price: 60.00,
+        quantity: 80,
+        description: 'Traditional Indian ice cream made from reduced milk, denser and creamier than regular ice cream.',
+        image: '/images/sweets/kulfi_malai.png'
     },
     {
         id: 16,
-        name: 'Lollipops Assortment',
-        category: 'Candies',
-        price: 4.50,
-        quantity: 80,
-        description: 'Colorful swirl lollipops.',
-        image: 'https://images.unsplash.com/photo-1575224300306-1b8da36134ec?w=800&q=80'
+        name: 'Kulfi (Pista)',
+        category: 'Frozen Desserts',
+        price: 70.00,
+        quantity: 75,
+        description: 'Pistachio-flavored kulfi with real pistachio pieces. Refreshing and rich.',
+        image: '/images/sweets/kulfi_pista.png'
     }
 ];

@@ -15,7 +15,7 @@ const Shop = () => {
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState('');
     const [selectedCategory, setSelectedCategory] = useState('All');
-    const [priceRange, setPriceRange] = useState(100);
+    const [priceRange, setPriceRange] = useState(1000);
     const [showFilters, setShowFilters] = useState(false);
 
     // Fetch from API
@@ -168,7 +168,7 @@ const Shop = () => {
                                     <input
                                         type="range"
                                         min="0"
-                                        max="100"
+                                        max="1000"
                                         value={priceRange}
                                         onChange={(e) => setPriceRange(Number(e.target.value))}
                                         className="w-full h-2 bg-gray-200 dark:bg-slate-700 rounded-lg appearance-none cursor-pointer accent-primary"
