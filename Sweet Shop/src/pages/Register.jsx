@@ -60,7 +60,7 @@ const Register = () => {
                             <Input
                                 id="name"
                                 label="Full Name"
-                                placeholder="John Doe"
+                                placeholder="Your name"
                                 icon={User}
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
