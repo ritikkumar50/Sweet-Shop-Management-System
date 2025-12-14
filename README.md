@@ -94,10 +94,4 @@ Follow these instructions to set up the project locally.
 - `npm run build`: Builds the app for production.
 - `npm run preview`: Previews the production build.
 
-## 🤝 Contributing
 
-Contributions are welcome! Please fork the repository and submit a pull request for any improvements or bug fixes.
-
-## 📄 License
-
-This project is licensed under the ISC License.
