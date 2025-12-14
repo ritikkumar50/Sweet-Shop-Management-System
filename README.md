@@ -94,4 +94,12 @@ Follow these instructions to set up the project locally.
 - `npm run build`: Builds the app for production.
 - `npm run preview`: Previews the production build.
 
+## AI Usage Disclosure
+
+AI tools were used selectively during development for boilerplate generation,
+debugging assistance, and refactoring suggestions.
+All final code was reviewed and validated by the author and tested by ai assisstance
+
+
+
 
