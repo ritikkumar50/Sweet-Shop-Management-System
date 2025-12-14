@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import api from '../api/client';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 import SweetCard from '../components/features/SweetCard';
 import Input from '../components/ui/Input';
 import LottieLoader from '../components/ui/LottieLoader';
@@ -46,19 +47,26 @@ const Shop = () => {
     const { addToCart, cart } = useCart();
     const { user } = useAuth();
     const navigate = useNavigate();
+    const { addToast } = useToast();
 
-    const handleAddToCart = (sweet, quantity) => {
+    const handleAddToCart = (sweet, quantity, weight = '1kg', isBuyNow = false) => {
         if (!user) {
             navigate('/login');
             return;
         }
-        addToCart(sweet, quantity);
-        alert(`Added ${quantity} x ${sweet.name} to cart!`);
+        addToCart(sweet, quantity, weight);
+
+        if (isBuyNow) {
+            navigate('/cart');
+        } else {
+            addToast(`Added ${quantity} x ${sweet.name} (${weight}) to cart!`);
+        }
     };
 
     const getAdjustedQuantity = (sweet) => {
-        const cartItem = cart.find(item => item._id === sweet._id);
-        const inCartQty = cartItem ? cartItem.quantity : 0;
+        const inCartQty = cart
+            .filter(item => item._id === sweet._id)
+            .reduce((total, item) => total + item.quantity, 0);
         return Math.max(0, sweet.quantity - inCartQty);
     };
 
@@ -163,7 +171,7 @@ const Shop = () => {
                                 <div>
                                     <div className="flex justify-between items-center mb-3">
                                         <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Price Range</label>
-                                        <span className="text-sm text-gray-500 font-medium">$0 - ${priceRange}</span>
+                                        <span className="text-sm text-gray-500 font-medium">₹0 - ₹{priceRange}</span>
                                     </div>
                                     <input
                                         type="range"

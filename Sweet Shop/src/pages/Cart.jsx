@@ -28,9 +28,9 @@ const Cart = () => {
             for (const item of cart) {
                 await api.post(`/sweets/${item._id}/purchase`, { quantity: item.quantity });
             }
-            alert('Purchase successful!');
+            // alert('Purchase successful!'); // Removed
             clearCart();
-            navigate('/shop');
+            navigate('/order-success');
         } catch (error) {
             console.error('Checkout error:', error);
             alert(error.response?.data?.message || 'Failed to complete purchase. Some items may be out of stock.');
@@ -67,36 +67,38 @@ const Cart = () => {
                     {/* Cart Items */}
                     <div className="lg:col-span-2 space-y-4">
                         {cart.map((item) => (
-                            <div key={item._id} className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 flex flex-col sm:flex-row gap-4 items-center">
+                            <div key={item.cartItemId} className="bg-white dark:bg-slate-800 p-4 rounded-xl shadow-sm border border-gray-100 dark:border-slate-700 flex flex-col sm:flex-row gap-4 items-center">
                                 <img
                                     src={item.image}
                                     alt={item.name}
                                     className="w-24 h-24 rounded-lg object-cover bg-gray-100"
                                 />
                                 <div className="flex-grow text-center sm:text-left">
-                                    <h3 className="font-bold text-gray-900 dark:text-white">{item.name}</h3>
+                                    <h3 className="font-bold text-gray-900 dark:text-white">
+                                        {item.name} <span className="text-sm font-normal text-gray-500">({item.weight || '1kg'})</span>
+                                    </h3>
                                     <p className="text-sm text-gray-500 dark:text-gray-400">{item.category}</p>
-                                    <p className="text-primary font-bold mt-1">${item.price.toFixed(2)}</p>
+                                    <p className="text-primary font-bold mt-1">₹{item.price.toFixed(2)}</p>
                                 </div>
 
                                 <div className="flex items-center gap-4">
                                     <div className="flex items-center border border-gray-200 dark:border-slate-600 rounded-full px-2 py-1">
                                         <button
-                                            onClick={() => updateQuantity(item._id, item.quantity - 1)}
+                                            onClick={() => updateQuantity(item.cartItemId, item.quantity - 1)}
                                             className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary transition-colors"
                                         >
                                             <Minus className="w-4 h-4" />
                                         </button>
                                         <span className="font-medium text-gray-800 dark:text-white w-8 text-center">{item.quantity}</span>
                                         <button
-                                            onClick={() => updateQuantity(item._id, item.quantity + 1)}
+                                            onClick={() => updateQuantity(item.cartItemId, item.quantity + 1)}
                                             className="w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary transition-colors"
                                         >
                                             <Plus className="w-4 h-4" />
                                         </button>
                                     </div>
                                     <button
-                                        onClick={() => removeFromCart(item._id)}
+                                        onClick={() => removeFromCart(item.cartItemId)}
                                         className="p-2 text-gray-400 hover:text-red-500 transition-colors"
                                     >
                                         <Trash2 className="w-5 h-5" />
@@ -114,15 +116,15 @@ const Cart = () => {
                             <div className="space-y-3 mb-6">
                                 <div className="flex justify-between text-gray-600 dark:text-gray-400">
                                     <span>Subtotal</span>
-                                    <span>${totalPrice.toFixed(2)}</span>
+                                    <span>₹{totalPrice.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between text-gray-600 dark:text-gray-400">
                                     <span>Tax (10%)</span>
-                                    <span>${(totalPrice * 0.1).toFixed(2)}</span>
+                                    <span>₹{(totalPrice * 0.1).toFixed(2)}</span>
                                 </div>
                                 <div className="border-t border-gray-200 dark:border-slate-700 pt-3 flex justify-between font-bold text-lg text-[#4A3B32] dark:text-white">
                                     <span>Total</span>
-                                    <span>${(totalPrice * 1.1).toFixed(2)}</span>
+                                    <span>₹{(totalPrice * 1.1).toFixed(2)}</span>
                                 </div>
                             </div>
 

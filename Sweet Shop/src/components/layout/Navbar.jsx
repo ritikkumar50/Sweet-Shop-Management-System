@@ -41,7 +41,7 @@ const Navbar = () => {
                     {/* Logo */}
                     <Link to="/" className="flex items-center gap-2 group">
                         <Cake className="w-6 h-6 text-primary" />
-                        <span className="font-serif font-bold text-xl text-[#4A3B32] dark:text-white">Sweet Delights</span>
+                        <span className="font-serif font-bold text-xl text-[#4A3B32] dark:text-white">Parampara Sweets</span>
                     </Link>
 
                     {/* Center Links */}

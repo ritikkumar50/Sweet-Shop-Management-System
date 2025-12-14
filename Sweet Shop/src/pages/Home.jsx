@@ -75,18 +75,47 @@ const Home = () => {
 
                     <div className="grid md:grid-cols-3 gap-8">
                         {[
-                            { name: "Sarah Johnson", text: "The best chocolate truffles I've ever tasted! Absolutely divine." },
-                            { name: "Michael Chen", text: "My go-to for birthday cakes. Never disappoints!" },
-                            { name: "Emma Williams", text: "Fresh, delicious, and beautifully packaged. Love it!" }
+                            { name: "Aman singh", text: "बिलकुल घर जैसा स्वाद! गुलाब जामुन बस मुँह में घुल जाते हैं। शहर की सबसे अच्छी मिठाई की दुकान!" },
+                            { name: "Priya Patel", text: "I had ordered Kaju Katli for Diwali, and everyone loved it. Fast delivery and excellent packaging. 10/10." },
+                            { name: "Ritik Kumar", text: "असली स्वाद! मोतीचूर के लड्डू तो बस लाजवाब हैं। खा कर मज़ा आ गया। मैं फिर ज़रूर ऑर्डर करूँगा।" }
                         ].map((testimonial, idx) => (
-                            <div key={idx} className="bg-[#FFFBF9] dark:bg-slate-900 p-8 rounded-2xl border border-transparent hover:border-primary/20 transition-colors">
+                            <div key={idx} className="bg-[#FFFBF9] dark:bg-slate-900 p-8 rounded-2xl border border-transparent hover:border-primary/20 transition-colors shadow-sm">
                                 <div className="flex gap-1 text-primary mb-4">
                                     {[...Array(5)].map((_, i) => <Star key={i} className="w-5 h-5 fill-current" />)}
                                 </div>
-                                <p className="text-lg text-[#4A3B32] dark:text-gray-200 italic mb-6">"{testimonial.text}"</p>
-                                <div className="font-bold font-serif text-[#4A3B32] dark:text-white">{testimonial.name}</div>
+                                <p className="text-lg text-[#4A3B32] dark:text-gray-200 italic mb-6 leading-relaxed">"{testimonial.text}"</p>
+                                <div className="font-bold font-serif text-[#4A3B32] dark:text-white flex items-center gap-2">
+                                    <div className="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center text-primary font-bold text-sm">
+                                        {testimonial.name[0]}
+                                    </div>
+                                    {testimonial.name}
+                                </div>
                             </div>
                         ))}
+                    </div>
+
+                    {/* Delivery Partners */}
+                    <div className="mt-24 pt-16 border-t border-gray-100 dark:border-slate-800">
+                        <p className="text-center text-gray-500 dark:text-gray-400 font-medium mb-8 uppercase tracking-widest text-sm">Also Available On</p>
+                        <div className="flex flex-wrap justify-center items-center gap-12 opacity-90 transition-all duration-500">
+                            {/* Zomato */}
+                            <div className="bg-white/80 dark:bg-white/90 p-2 rounded-xl hover:scale-105 transition-transform">
+                                <img src="/images/partners/zomato.png" alt="Zomato" className="h-8 md:h-10 object-contain" />
+                            </div>
+
+                            {/* Swiggy */}
+                            <div className="bg-white/80 dark:bg-white/90 p-2 rounded-xl hover:scale-105 transition-transform">
+                                <img src="/images/partners/swiggy.png" alt="Swiggy" className="h-8 md:h-10 object-contain" />
+                            </div>
+
+                            {/* Magicpin */}
+                            <div className="flex items-center gap-2 bg-white/80 dark:bg-white/90 p-2 rounded-xl hover:scale-105 transition-transform">
+                                <div className="w-8 h-8 bg-purple-600 rotate-45 transform flex items-center justify-center rounded-sm">
+                                    <span className="text-white font-bold text-xl -rotate-45">!</span>
+                                </div>
+                                <span className="text-2xl font-bold text-purple-600 tracking-tight">magicpin</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
